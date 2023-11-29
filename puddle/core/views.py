@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth import views as auth_views
 
 from item.models import Category
 from item.models import Item
 
 from .forms import SignupForm
+from .forms import LoginForm
 
 # Create your views here.
 def index(request):
@@ -36,4 +38,4 @@ def signup(request):
     return render(request, 'core/signup.html', context)
 
 def login(request):
-    pass
+    return auth_views.LoginView.as_view(template_name="core/login.html", authentication_form=LoginForm)(request)
